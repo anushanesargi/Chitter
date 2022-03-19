@@ -8,5 +8,18 @@ class Chitter < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  get '/' do
+    erb :index
+  end
+
+  post '/users' do
+    User.create(username: params[:username], password: params[:password])
+    redirect '/peeps'
+  end
+
+  get '/peeps' do
+    "Welcome"
+  end
+
   run! if app_file == $0
 end
