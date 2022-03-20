@@ -20,7 +20,7 @@ feature 'authentication' do
     click_button('Login')
 
     expect(page).not_to have_content 'Welcome, test12'
-    # expect(page).to have_content 'Please check your username or password.'
+    expect(page).to have_content 'Please check your username or password.'
   end
 
   scenario 'a user sees an error if they get their password wrong' do
@@ -32,7 +32,7 @@ feature 'authentication' do
     click_button('Login')
 
     expect(page).not_to have_content 'Welcome, test12'
-    # expect(page).to have_content 'Please check your username or password.'
+    expect(page).to have_content 'Please check your username or password.'
   end
 
 end

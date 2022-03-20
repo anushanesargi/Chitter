@@ -1,12 +1,13 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/flash'
 require_relative 'lib/user'
 
 class Chitter < Sinatra::Base
   enable :sessions
+  register Sinatra::Flash
   configure :development do
     register Sinatra::Reloader
-    register Sinatra::Flash
   end
 
   get '/' do
@@ -30,7 +31,7 @@ class Chitter < Sinatra::Base
       session[:user_id] = user.id
       redirect '/peeps'
     else
-      # flash[:notice] = 'Please check your username or password.'
+      flash[:notice] = 'Please check your username or password.'
       redirect '/'
     end
 
