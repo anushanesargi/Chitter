@@ -1,5 +1,5 @@
 feature 'authentication' do
-  it 'a user can Login' do
+  scenario 'a user can Login' do
 
     User.create(username: 'test12', password: 'password12')
 
@@ -10,4 +10,17 @@ feature 'authentication' do
 
     expect(page).to have_content 'Welcome, test12'
   end
+
+  scenario 'a user sees an error if they get their username wrong' do
+    # User.create(username: 'test12', password: 'password123')
+
+    # visit '/'
+    # fill_in('username', with: 'nottherightusername')
+    # fill_in('password', with: 'password123')
+    # click_button('Login')
+
+    # expect(page).not_to have_content 'Welcome, test12'
+    # expect(page).to have_content 'Please check your username or password.'
+  end
+
 end
