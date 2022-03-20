@@ -4,6 +4,7 @@ ruby '3.1.1'
 
 gem 'sinatra'
 gem 'pg'
+gem 'bcrypt'
 
 group :test do
   gem 'capybara'

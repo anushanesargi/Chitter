@@ -1,3 +1,3 @@
-CREATE TABLE Username (id SERIAL PRIMARY KEY, username VARCHAR(10), password VARCHAR(10));
+CREATE TABLE Username (id SERIAL PRIMARY KEY, username VARCHAR(50), password VARCHAR(200));
 
-CREATE TABLE Messages (id SERIAL PRIMARY KEY, username VARCHAR(10), message VARCHAR(180));
+CREATE TABLE Messages (id SERIAL PRIMARY KEY, username VARCHAR(50), message VARCHAR(180));
