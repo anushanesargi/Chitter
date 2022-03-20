@@ -36,10 +36,10 @@ describe '.authenticate' do
     expect(authenticated_user.id).to eq user.id
   end
 
-  # it 'returns nil given an incorrect username address' do
-  #   user = User.create(username: 'test12', password: 'password12')
+  it 'returns nil given an incorrect username address' do
+    user = User.create(username: 'test12', password: 'password12')
 
-  #   expect(User.authenticate('nottherightusername', 'password123')).to be_nil
-  # end
+    expect(User.authenticate('nottherightusername', 'password123')).to be_nil
+  end
 
 end
