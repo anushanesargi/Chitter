@@ -24,4 +24,15 @@ describe '.find' do
     expect(result.id).to eq user.id
     expect(result.username).to eq user.username
   end
+
+end
+
+describe '.authenticate' do
+  it 'returns a user given a correct username and password, if one exists' do
+    user = User.create(username: 'test12', password: 'password12')
+    authenticated_user = User.authenticate(username: 'test12', password: 'password12')
+
+    expect(authenticated_user.id).to eq user.id
+  end
+
 end

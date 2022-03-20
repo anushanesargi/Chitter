@@ -37,4 +37,16 @@ class User
     User.new(id: result[0]['id'], username: result[0]['username'])
   end
 
+
+  def self.authenticate(username:, password:)
+    if ENV['ENVIRONMENT'] == "test"
+      connection = PG.connect(dbname: 'chitter_test')
+    else
+      connection = PG.connect(dbname: 'chitter')
+    end
+
+    result = connection.exec_params("SELECT * FROM Username WHERE username = $1", [username])
+    User.new(id: result[0]['id'], username: result[0]['username'])
+  end
+
 end
