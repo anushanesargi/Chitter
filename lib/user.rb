@@ -19,4 +19,18 @@ class User
     @id = id
     @username = username
   end
+
+  def self.find(id)
+    return nil unless id
+
+    if ENV['ENVIRONMENT'] == "test"
+      connection = PG.connect(dbname: 'chitter_test')
+    else
+      connection = PG.connect(dbname: 'chitter')
+    end
+
+    result = connection.exec_params("SELECT * FROM Username WHERE id = $1", [id])
+    User.new(id: result[0]['id'], username: result[0]['username'])
+  end
+
 end

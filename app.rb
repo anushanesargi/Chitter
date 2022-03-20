@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
-# require_relative 'lib/chitter'
+require_relative 'lib/user'
 
 class Chitter < Sinatra::Base
   enable :sessions
@@ -13,12 +13,14 @@ class Chitter < Sinatra::Base
   end
 
   post '/users' do
-    User.create(username: params[:username], password: params[:password])
+    user = User.create(username: params[:username], password: params[:password])
+    session[:user_id] = user.id
     redirect '/peeps'
   end
 
   get '/peeps' do
-    "Welcome"
+    @user = User.find(session[:user_id]).username
+    erb :peeps
   end
 
   run! if app_file == $0
