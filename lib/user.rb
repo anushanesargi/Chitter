@@ -38,7 +38,8 @@ class User
   end
 
 
-  def self.authenticate(username:, password:)
+  def self.authenticate(username, password)
+
     if ENV['ENVIRONMENT'] == "test"
       connection = PG.connect(dbname: 'chitter_test')
     else

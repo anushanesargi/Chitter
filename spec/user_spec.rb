@@ -30,9 +30,16 @@ end
 describe '.authenticate' do
   it 'returns a user given a correct username and password, if one exists' do
     user = User.create(username: 'test12', password: 'password12')
-    authenticated_user = User.authenticate(username: 'test12', password: 'password12')
+    
+    authenticated_user = User.authenticate('test12', 'password12')
 
     expect(authenticated_user.id).to eq user.id
   end
+
+  # it 'returns nil given an incorrect username address' do
+  #   user = User.create(username: 'test12', password: 'password12')
+
+  #   expect(User.authenticate('nottherightusername', 'password123')).to be_nil
+  # end
 
 end

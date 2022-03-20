@@ -12,6 +12,10 @@ class Chitter < Sinatra::Base
     erb :index
   end
 
+  get '/register/new' do
+    erb :register
+  end
+
   post '/register' do
     user = User.create(username: params[:username], password: params[:password])
     session[:user_id] = user.id
@@ -19,7 +23,8 @@ class Chitter < Sinatra::Base
   end
 
   post '/login' do
-    user = User.authenticate(username: params[:username], password: params[:password])
+    # p params
+    user = User.authenticate(params[:input_username], params[:input_password])
     session[:user_id] = user.id
     redirect '/peeps'
   end
