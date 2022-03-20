@@ -12,14 +12,26 @@ feature 'authentication' do
   end
 
   scenario 'a user sees an error if they get their username wrong' do
-    # User.create(username: 'test12', password: 'password123')
+    User.create(username: 'test12', password: 'password123')
 
-    # visit '/'
-    # fill_in('username', with: 'nottherightusername')
-    # fill_in('password', with: 'password123')
-    # click_button('Login')
+    visit '/'
+    fill_in('input_username', with: 'nottherightusername')
+    fill_in('input_password', with: 'password123')
+    click_button('Login')
 
-    # expect(page).not_to have_content 'Welcome, test12'
+    expect(page).not_to have_content 'Welcome, test12'
+    # expect(page).to have_content 'Please check your username or password.'
+  end
+
+  scenario 'a user sees an error if they get their password wrong' do
+    User.create(username: 'test12', password: 'password123')
+
+    visit '/'
+    fill_in('input_username', with: 'test12')
+    fill_in('input_password', with: 'password')
+    click_button('Login')
+
+    expect(page).not_to have_content 'Welcome, test12'
     # expect(page).to have_content 'Please check your username or password.'
   end
 
