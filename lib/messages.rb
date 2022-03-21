@@ -22,4 +22,8 @@ class Messages
     @message = message
   end
 
+  def self.all
+    
+  end
+
 end
