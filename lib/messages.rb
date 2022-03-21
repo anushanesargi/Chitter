@@ -23,7 +23,15 @@ class Messages
   end
 
   def self.all
-    
+    if ENV['ENVIRONMENT'] == "test"
+      connection = PG.connect(dbname: 'chitter_test')
+    else
+      connection = PG.connect(dbname: 'chitter')
+    end
+
+    result = connection.exec_params("SELECT * FROM Messages INNER JOIN Username ON Username.id = Messages.user_id ORDER BY Username;")
+    # Messages.new(id: result[0]['id'], username: result[0]['username'], message: result[0]['message'])
+
   end
 
 end
