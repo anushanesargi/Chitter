@@ -1,0 +1,12 @@
+
+<% @params.each do |k, v|%> 
+  <% @name = k %>
+<% end %>
+
+<p><%= @name %></p>
+
+<% @result.each do |peep| %>
+  <% next if peep['username'] != @name %>
+    <p><%= peep['message'] %></p>
+    <p><%= peep['date']%> <%= peep['time'] %><p>
+<% end %>

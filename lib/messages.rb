@@ -1,15 +1,11 @@
 require_relative 'user'
+require 'Date'
 
 class Messages
-  def self.create(user_id:, message:)
+  def self.create(user_id:, message:, date:, time: )
+    db_env_connection
 
-    if ENV['ENVIRONMENT'] == "test"
-      connection = PG.connect(dbname: 'chitter_test')
-    else
-      connection = PG.connect(dbname: 'chitter')
-    end
-
-    result = connection.exec_params("INSERT INTO Messages (user_id, message) VALUES($1, $2) RETURNING id, user_id, message;", [user_id, message])
+    result = @@connection.exec_params("INSERT INTO Messages (user_id, message, date, time) VALUES($1, $2, $3, $4) RETURNING id, user_id, message;", [user_id, message, date, time])
     Messages.new(id: result[0]['id'], user_id: result[0]['user_id'], message: result[0]['message'])
 
   end
@@ -23,14 +19,23 @@ class Messages
   end
 
   def self.all
-    if ENV['ENVIRONMENT'] == "test"
-      connection = PG.connect(dbname: 'chitter_test')
-    else
-      connection = PG.connect(dbname: 'chitter')
-    end
+    db_env_connection
 
-    result = connection.exec_params("SELECT * FROM Messages INNER JOIN Username ON Username.id = Messages.user_id ORDER BY Username;")
-    # Messages.new(id: result[0]['id'], username: result[0]['username'], message: result[0]['message'])
+    result = @@connection.exec_params("SELECT Messages.message, Messages.date, Messages.time, Username.username 
+      FROM Messages 
+      INNER JOIN Username ON Username.id = Messages.user_id ORDER BY username;")
+
+  end
+
+  private
+
+  def self.db_env_connection
+
+    if ENV['ENVIRONMENT'] == "test"
+      @@connection = PG.connect(dbname: 'chitter_test')
+    else
+      @@connection = PG.connect(dbname: 'chitter')
+    end
 
   end
 

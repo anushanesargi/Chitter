@@ -2,6 +2,8 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require 'sinatra/flash'
 require_relative 'lib/user'
+require_relative 'lib/messages'
+require 'date'
 
 class Chitter < Sinatra::Base
   enable :sessions
@@ -37,9 +39,24 @@ class Chitter < Sinatra::Base
 
   end
 
+  post '/peeps' do
+    t = Time.now
+    Messages.create(user_id: session[:user_id], message: params[:message], date: t.strftime("%Y-%m-%d") , time: t.strftime("%H:%M"))
+    redirect '/peeps'
+  end
+
   get '/peeps' do
+    @t = Time.now
     @user = User.find(session[:user_id]).username
+    @result = Messages.all
     erb :peeps
+  end
+
+  get '/peeps/' do
+    @name = ''
+    @params = params
+    @result = Messages.all
+    erb :peeps_filter
   end
 
   run! if app_file == $0

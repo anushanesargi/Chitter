@@ -1,4 +1,13 @@
 <p>Welcome, <%= @user%></p>
+<% @result.each do |peep| %>
+  <a name="value" href="/peeps/?<%= peep['username'] %>"><%= peep['username'] %></a>
+  <p><%= peep['message'] %></p>
+  <p><%= peep['date']%> <%= peep['time'] %></p>
+<% end %>
+<form action="/peeps" method="post">
+  <textarea type="text" name="message" value="input"> </textarea>
+  <input type="submit" value="Post" />
+</form>
 
 <form action="/" method="get">
   <input type="submit" value="Sign out" />
