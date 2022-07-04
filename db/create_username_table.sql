@@ -1,3 +1,3 @@
 CREATE TABLE Username (id SERIAL PRIMARY KEY, username VARCHAR(50), password VARCHAR(200));
 
-CREATE TABLE Messages (id SERIAL PRIMARY KEY, username VARCHAR(50), message VARCHAR(180), date DATE, time TIME);
+CREATE TABLE Messages (id SERIAL PRIMARY KEY, user_id INT REFERENCES Username, username VARCHAR(50), message VARCHAR(180), date DATE, time TIME);

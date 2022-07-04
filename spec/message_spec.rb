@@ -16,15 +16,18 @@ end
 
 describe '.all' do
   it 'returns all messages with username' do
-    t = Time.now
+    t = Time.new
+    # p Time.new
     user = User.create(username: 'test12', password: 'password12')
 
     Messages.create(message: "Test Message", user_id: user.id, date: t.strftime("%Y-%m-%d") , time: t.strftime("%H:%M"))
-    Messages.create(message: "Hello", user_id: user.id, date: t.strftime("%Y-%m-%d") , time: t.strftime("%H:%M"))
+    # t_plus_1_second = t + 1
+    Messages.create(message: "Hello", user_id: user.id, date: t.strftime("%Y-%m-%d") , time: (t.strftime("%H:%M")))
 
 
     all = Messages.all
-    p all
+    p all[1]
+    p all[0]
 
     p all[1]['date']
     expect(all[1]['username']).to eq 'test12'
