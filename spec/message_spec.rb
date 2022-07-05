@@ -17,12 +17,15 @@ end
 describe '.all' do
   it 'returns all messages with username' do
     t = Time.new
-    # p Time.new
+    p t
+    d = Date.new
+    p d
     user = User.create(username: 'test12', password: 'password12')
 
-    Messages.create(message: "Test Message", user_id: user.id, date: t.strftime("%Y-%m-%d") , time: t.strftime("%H:%M"))
-    # t_plus_1_second = t + 1
-    Messages.create(message: "Hello", user_id: user.id, date: t.strftime("%Y-%m-%d") , time: (t.strftime("%H:%M")))
+    Messages.create(message: "Test Message", user_id: user.id, date: t.strftime("%Y-%m-%d") , time: t.strftime("%H:%M:%S"))
+    t_plus_1_second = t + 10
+    p t_plus_1_second
+    Messages.create(message: "Hello", user_id: user.id, date: t.strftime("%Y-%m-%d") , time: (t_plus_1_second.strftime("%H:%M:%S")))
 
 
     all = Messages.all
