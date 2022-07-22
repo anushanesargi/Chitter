@@ -1,14 +1,76 @@
-<p>Welcome, <%= @user%></p>
-<% @result.each do |peep| %>
-  <a name="value" href="/peeps/?<%= peep['username'] %>"><%= peep['username'] %></a>
-  <p><%= peep['message'] %></p>
-  <p><%= peep['date']%> <%= peep['time'] %></p>
-<% end %>
-<form action="/peeps" method="post">
-  <textarea type="text" name="message" value="input"> </textarea>
-  <input type="submit" value="Post" />
-</form>
+<p class="header">Welcome, <%= @user%></p>
+<div class="login-page">
+  <div class="form">
+    <div class="scroll">
+    <% @result.each do |peep| %>
+      <p  class="message"><a name="value" href="/peeps/?<%= peep['username'] %>"><%= peep['username'] %></a></p>
+      <p><%= peep['message'] %></p>
+      <p  class="message"><%= Date.parse(peep['date']).strftime("%d/%m/%Y")%> <%= Time.parse(peep['time']).strftime("%I:%M%p") %></p>
+    <% end %>
+    </div>
+    <form action="/peeps" method="post">
+      <textarea type="text" name="message" value="input" placeholder="Type your peep here.."> </textarea>
+      <input type="submit" value="Post" />
+    </form>
 
-<form action="/" method="get">
-  <input type="submit" value="Sign out" />
-</form>
+    <form action="/" method="get">
+      <input type="submit" value="Sign out" />
+    </form>
+  </div>
+</div>
+
+
+<style>
+  .header{
+    margin-top: 50px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+  }
+  .scroll {
+    display:block;
+    border: 1px solid grey;
+    padding:5px;
+    margin-top:5px;
+    width:480px;
+    height:400px;
+    overflow:scroll;
+  }
+  .form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 500px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+  font-size: 14px;
+}
+textarea {
+  width: 250px;
+  height: 100px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+</style>
