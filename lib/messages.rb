@@ -23,7 +23,7 @@ class Messages
 
     result = @@connection.exec_params("SELECT Messages.message, Messages.date, Messages.time, Username.username 
       FROM Messages 
-      INNER JOIN Username ON Username.id = Messages.user_id ORDER BY username, Messages.time DESC;")
+      INNER JOIN Username ON Username.id = Messages.user_id ORDER BY Messages.time DESC;")
 
   end
 
