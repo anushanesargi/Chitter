@@ -41,7 +41,9 @@ class Chitter < Sinatra::Base
 
   post '/peeps' do
     t = Time.now
-    Messages.create(user_id: session[:user_id], message: params[:message], date: t.strftime("%Y-%m-%d") , time: t.strftime("%H:%M"))
+    p "called post"
+    Messages.create(user_id: session[:user_id], message: params[:message])
+    p "called create"
     redirect '/peeps'
   end
 

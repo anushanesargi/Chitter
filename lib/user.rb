@@ -8,6 +8,8 @@ class User
 
     db_env_connection
 
+    p "calling user create"
+
     result = @@connection.exec_params("INSERT INTO Username (username, password) VALUES($1, $2) RETURNING id, username;", [username, encrypted_password])
     User.new(id: result[0]['id'], username: result[0]['username'])
 
