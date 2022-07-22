@@ -5,8 +5,8 @@ describe '#messages' do
     t = Time.now
     user = User.create(username: 'test12', password: 'password12')
 
-    messages = Messages.create(message: "Test Message", user_id: user.id, date: t.strftime("%Y-%m-%d") , time: t.strftime("%H:%M"))
-
+    # messages = Messages.create(message: "Test Message", user_id: user.id, date: t.strftime("%Y-%m-%d") , time: t.strftime("%H:%M"))
+    messages = Messages.create(message: "Test Message", user_id: user.id)
     expect(messages.user_id).to eq user.id
     expect(messages.message).to eq "Test Message"
   end
@@ -23,10 +23,10 @@ describe '.all' do
     # (t_plus_1_second.strftime("%H:%M:%S"))
     user = User.create(username: 'test12', password: 'password12')
 
-    Messages.create(message: "Test Message", user_id: user.id, date: Time.new , time: Time.new)
+    Messages.create(message: "Test Message", user_id: user.id)
     # t_plus_1_second = t + 10
     # p t_plus_1_second
-    Messages.create(message: "Hello", user_id: user.id, date: Time.new , time: Time.new + 20)
+    Messages.create(message: "Hello", user_id: user.id)
 
 
     all = Messages.all

@@ -2,10 +2,12 @@ require_relative 'user'
 require 'Date'
 
 class Messages
-  def self.create(user_id:, message:, date:, time: )
+  # def self.create(user_id:, message:, date:, time: )
+  def self.create(user_id:, message:)
     db_env_connection
 
-    result = @@connection.exec_params("INSERT INTO Messages (user_id, message, date, time) VALUES($1, $2, $3, $4) RETURNING id, user_id, message;", [user_id, message, date, time])
+    # result = @@connection.exec_params("INSERT INTO Messages (user_id, message, date, time) VALUES($1, $2, $3, $4) RETURNING id, user_id, message;", [user_id, message, date, time])
+    result = @@connection.exec_params("INSERT INTO Messages (user_id, message) VALUES($1, $2) RETURNING id, user_id, message;", [user_id, message])
     Messages.new(id: result[0]['id'], user_id: result[0]['user_id'], message: result[0]['message'])
 
   end
