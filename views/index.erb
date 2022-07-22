@@ -13,10 +13,10 @@
     <form class="login-form" action="/login" method="post">
       <input type="username" name="input_username" placeholder="Username"/>
       <input type="password" name="input_password" placeholder="Password"/>
-      <input type="submit" value="Login" />
+      <button>Login</button>
     </form>
     <form class="login-form" action="/register/new" method="get">
-      <p class="message">Not registered?<input type="submit" value="Register" /></p>
+      <p class="message">Not registered?<button>Register</button></p>
     </form>
   </div>
 </div>
@@ -60,5 +60,20 @@
 .form .message a {
   color: #4CAF50;
   text-decoration: none;
+}
+  .form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background-color: #328f8a;
+  background-image: linear-gradient(45deg,#328f8a,#08ac4b);
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
 }
 </style>
